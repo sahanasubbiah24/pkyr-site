@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education - PYKR</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="index.html"><img src="pkyr.png" alt="PYKR Logo"></a>
+                </div>
+                <div class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="education.html" class="active">Education</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="get-involved.html">Get Involved</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container">
+                <h1 class="page-title">Civic Education</h1>
+                <p class="page-subtitle">Learn Your Rights, Understand Your Power, Shape Your Future</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="education-intro">
+                    <h2>Why Civic Education Matters</h2>
+                    <p class="lead">Understanding your civic rights and responsibilities isn't just about passing a test—it's about having the knowledge and confidence to navigate the world as an empowered citizen.</p>
+                    <p>From knowing your rights during police encounters to understanding how to register to vote, civic education gives you the tools to protect yourself, advocate for your community, and participate fully in democracy.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="interactive-section quiz-section">
+            <div class="container">
+                <h2 class="section-title">Do You Know Your Rights?</h2>
+                <p class="section-intro">Test your knowledge with our quick 5-question quiz</p>
+                
+                <div id="quizContainer" class="quiz-container">
+                    <div id="quizQuestion" class="quiz-question"></div>
+                    <div id="quizOptions" class="quiz-options"></div>
+                    <div id="quizFeedback" class="quiz-feedback"></div>
+                    <div class="quiz-navigation">
+                        <button id="nextQuestionBtn" class="btn btn-primary" style="display: none;">Next Question</button>
+                    </div>
+                </div>
+
+                <div id="quizResults" class="quiz-results" style="display: none;">
+                    <h3>Quiz Complete!</h3>
+                    <div id="quizScore"></div>
+                    <button id="restartQuizBtn" class="btn btn-primary">Take Quiz Again</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scenario Section -->
+        <section id="scenario" class="interactive-section scenario-section">
+            <div class="container">
+                <h2 class="section-title">Choose Your Own Scenario</h2>
+                <p class="section-intro">Navigate real-world situations and learn the best responses</p>
+                
+                <div id="scenarioContainer" class="scenario-container">
+                    <div id="scenarioText" class="scenario-text"></div>
+                    <div id="scenarioOptions" class="scenario-options"></div>
+                    <div id="scenarioFeedback" class="scenario-feedback"></div>
+                    <div class="scenario-navigation">
+                        <button id="restartScenarioBtn" class="btn btn-secondary" style="display: none;">Start Over</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Poll Section -->
+        <section class="interactive-section poll-section">
+            <div class="container">
+                <h2 class="section-title">Your Voice Matters</h2>
+                <div class="poll-container">
+                    <h3>Do you feel civic education is taught well in your school?</h3>
+                    <div id="pollOptions" class="poll-options">
+                        <button class="poll-option" data-value="yes">Yes, very well</button>
+                        <button class="poll-option" data-value="somewhat">Somewhat</button>
+                        <button class="poll-option" data-value="not-really">Not really</button>
+                        <button class="poll-option" data-value="no">No, not at all</button>
+                    </div>
+                    <div id="pollResults" class="poll-results" style="display: none;">
+                        <p>Thank you for your response! Here's what others think:</p>
+                        <div class="poll-result-bars"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resource Section -->
+        <section class="content-section resources-section">
+            <div class="container">
+                <h2 class="section-title">Essential Resources</h2>
+               <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">-</div>
+                        <h3>Know Your Rights</h3>
+                        <p>__________________________</p>
+                        <a href="#" class="resource-link">Explore Resources →</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">-</div>
+                        <h3>some other resource</h3>
+                        <p>__________________________</p>
+                        <a href="#" class="resource-link">- →</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">-</div>
+                        <h3>some other resource</h3>
+                        <p>__________________________</p>
+                        <a href="#" class="resource-link">- →</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">-</div>
+                        <h3>some other resource</h3>
+                        <p>__________________________</p>
+                        <a href="#" class="resource-link">- →</a>
+                    </div>
+                </div> 
+            </div>
+        </section>
+
+        <!-- Voting Section -->
+        <section id="voting" class="content-section voting-section">
+            <div class="container">
+                <h2 class="section-title">Register to Vote</h2>
+                <div class="voting-content">
+                    <div class="voting-info">
+                        <h3>Why Your Vote Matters</h3>
+                        <p>Voting is one of the most powerful tools you have to shape your community and your future. Every election—from local school boards to federal offices—affects your daily life.</p>
+                        
+                        <h3>Voting Requirements</h3>
+                        <ul class="checklist">
+                            <li>Be a U.S. citizen</li>
+                            <li>Meet your state's residency requirements</li>
+                            <li>Be 18 years old on or before Election Day</li>
+                            <li>Register to vote (deadlines vary by state)</li>
+                        </ul>
+
+                        <h3>How to Register</h3>
+                        <ol class="numbered-list">
+                            <li>Check your state's registration deadline</li>
+                            <li>Gather required documents (ID, proof of address)</li>
+                            <li>Complete registration online, by mail, or in person</li>
+                            <li>Confirm your registration status</li>
+                        </ol>
+                    </div>
+                    <div class="voting-cta">
+                        <div class="cta-box">
+                            <h3>Ready to Register?</h3>
+                            <p>Use these trusted resources to register to vote in your state</p>
+                            <a href="https://vote.gov" target="_blank" class="btn btn-large btn-primary">Register at Vote.gov</a>
+                            <a href="https://www.rockthevote.org" target="_blank" class="btn btn-large btn-secondary">Rock the Vote</a>
+                            <div class="additional-links">
+                                <a href="#">Check Registration Status</a>
+                                <a href="#">Find Your Polling Place</a>
+                                <a href="#">Request Absentee Ballot</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Topics Section -->
+        <section class="content-section topics-section">
+            <div class="container">
+                <h2 class="section-title">Civic Education Topics</h2>
+                <div class="topics-grid">
+                    <div class="topic-card">
+                        <h3>Constitutional Rights</h3>
+                        <p>understanding constitutional rights</p>
+                    </div>
+                    <div class="topic-card">
+                        <h3>Protest & Assembly</h3>
+                        <p>kniwing how to protest or smth</p>
+                    </div>
+                    <div class="topic-card">
+                        <h3>Voting</h3>
+                        <p>knowing how to vote</p>
+                    </div>
+                    <div class="topic-card">
+                        <h3>Free Speech</h3>
+                        <p>understanding ur first Amendment right</p>
+                    </div>
+                    <div class="topic-card">
+                        <h3>Civic Engagement</h3>
+                        <p>being engaged</p>
+                    </div>
+                    <div class="topic-card">
+                        <h3>Civic Education</h3>
+                        <p>being educated</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-logo"><img src="logo.jpg" alt="PYKR"></h3>
+                    <p>Empowering youth through education and action</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="education.html">Education</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="get-involved.html">Get Involved</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/project.know.your.rights" target="_blank" aria-label="Instagram">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="YouTube">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="TikTok">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <p class="contact-email">
+                        <a href="mailto:info@pykr.org">info@pykr.org</a>
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 PYKR. All rights reserved. Empowering youth for a better tomorrow.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
