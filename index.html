@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PKYR — Close the Gap. Elevate the Future.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400;1,9..40,700&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   TOKENS — Warm Nonprofit Palette
+═══════════════════════════════════════════ */
+:root {
+  --ink:         #1E1330;
+  --ink-mid:     #2E1F4A;
+  --ink-soft:    #4A3D6B;
+  --cream:       #FAF7FF;
+  --cream-2:     #F3ECFF;
+  --cream-3:     #EAE0FF;
+  --cream-4:     #E4C9FF;
+  --sage:        #642E80;
+  --sage-mid:    #572E80;
+  --sage-light:  #8E5FB3;
+  --sage-pale:   #F3ECFF;
+  --sage-soft:   #EECFFF;
+  --clay:        #7B3FA0;
+  --clay-pale:   #F5E9FF;
+  --amber:       #C9A24A;
+  --amber-pale:  #FFF6E6;
+  --muted:       #6E647A;
+  --muted-2:     #A79DB5;
+  --border:      rgba(30, 19, 48, 0.08);
+  --border-mid:  rgba(30, 19, 48, 0.14);
+  --nav-h: 70px;
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 30px;
+  --r-full: 9999px;
+  --sh-sm:  0 1px 4px rgba(26,24,20,.06), 0 2px 12px rgba(26,24,20,.04);
+  --sh-md:  0 4px 20px rgba(26,24,20,.09), 0 1px 4px rgba(26,24,20,.04);
+  --sh-lg:  0 12px 48px rgba(26,24,20,.13), 0 2px 8px rgba(26,24,20,.06);
+  --sh-xl:  0 24px 72px rgba(26,24,20,.18);
+  --sh-s:   0 8px 32px rgba(61,107,82,.22);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page { display: none; }
+.page.active { display: block; animation: pgIn .4s cubic-bezier(.16,1,.3,1) both; }
+@keyframes pgIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  background: rgba(250,248,244,.95);
+  backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  transition: box-shadow .3s;
+}
+nav.scrolled { box-shadow: var(--sh-md); }
+
+.logo {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: -.04em;
+  color: var(--ink);
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+}
+.logo-accent { color: var(--sage); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .005em;
+  color: var(--muted);
+  text-decoration: none;
+  cursor: pointer;
+  padding: 7px 13px;
+  border-radius: var(--r-sm);
+  transition: color .16s, background .16s;
+}
+.nav-links a:hover { color: var(--ink); background: var(--cream-2); }
+.nav-links a.active { color: var(--sage); }
+
+.nav-cta {
+  font-size: .8rem;
+  font-weight: 800;
+  letter-spacing: .01em;
+  color: var(--cream);
+  background: var(--ink);
+  border: none;
+  padding: 10px 22px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: background .2s, transform .18s;
+}
+.nav-cta:hover { background: var(--sage); transform: translateY(-1px); }
+
+.ham {
+  display: none;
+  flex-direction: column;
+  gap: 4.5px;
+  cursor: pointer;
+  padding: 8px;
+  background: none;
+  border: none;
+}
+.ham span { width: 20px; height: 2px; background: var(--ink); border-radius: 2px; display: block; transition: all .2s; }
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 14px;
+}
+.label::before { content: ''; display: block; width: 20px; height: 2px; background: var(--sage); border-radius: 2px; }
+.label.light { color: rgba(250,248,244,.7); }
+.label.light::before { background: rgba(250,248,244,.5); }
+.label.clay { color: var(--clay); }
+.label.clay::before { background: var(--clay); }
+
+.sec-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(2.2rem,3.5vw,3.2rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -.04em;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.sec-title em { font-style: italic; font-family: 'Lora', serif; font-weight: 600; color: var(--sage); }
+.sec-title.light { color: var(--cream); }
+.sec-title.light em { color: var(--sage-light); }
+
+.sec-body { font-size: .96rem; line-height: 1.8; color: var(--muted); max-width: 480px; font-weight: 400; }
+
+.sec { padding: 100px 48px; }
+.inn { max-width: 1120px; margin: 0 auto; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .83rem;
+  font-weight: 800;
+  letter-spacing: .01em;
+  padding: 12px 24px;
+  border-radius: var(--r-sm);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .2s cubic-bezier(.16,1,.3,1);
+  white-space: nowrap;
+}
+.btn-primary { background: var(--ink); color: var(--cream); }
+.btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+.btn-sage { background: var(--sage); color: #fff; }
+.btn-sage:hover { background: var(--sage-mid); transform: translateY(-1px); box-shadow: var(--sh-s); }
+.btn-outline { background: transparent; color: var(--ink); border: 2px solid var(--border-mid); }
+.btn-outline:hover { border-color: var(--sage); color: var(--sage); background: var(--sage-pale); }
+.btn-outline-light { background: transparent; color: rgba(250,248,244,.8); border: 2px solid rgba(250,248,244,.2); }
+.btn-outline-light:hover { background: rgba(250,248,244,.1); color: var(--cream); border-color: rgba(250,248,244,.45); }
+.btn-cream { background: var(--cream); color: var(--ink); box-shadow: var(--sh-sm); }
+.btn-cream:hover { box-shadow: var(--sh-md); transform: translateY(-1px); }
+.btn-sm { padding: 8px 16px; font-size: .77rem; }
+.btn-lg { padding: 15px 32px; font-size: .9rem; }
+
+/* ═══════════════════════════════════════════
+   HERO — Fixed image layout
+═══════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  padding-top: var(--nav-h);
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.hero-texture { position: absolute; inset: 0; pointer-events: none; }
+.hero-texture::before {
+  content: '';
+  position: absolute;
+  width: 800px; height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(100,46,128,.35) 0%, transparent 65%);
+  top: -200px; right: -200px;
+  animation: breathe 18s ease-in-out infinite;
+}
+.hero-texture::after {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(142,95,179,.12) 0%, transparent 65%);
+  bottom: -150px; left: 80px;
+  animation: breathe 24s ease-in-out infinite reverse;
+}
+.hero-stripe {
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  width: 42%;
+  background: rgba(100,46,128,.05);
+  border-left: 1px solid rgba(250,248,244,.04);
+  pointer-events: none;
+}
+
+@keyframes breathe {
+  0%,100% { transform: scale(1) translate(0,0); }
+  50% { transform: scale(1.08) translate(-20px,30px); }
+}
+
+.hero-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 80px 48px;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 64px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyeline { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; animation: fadeUp .55s .08s both; }
+.hero-chip {
+  font-size: .67rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--sage-light);
+  padding: 5px 12px;
+  border: 1.5px solid rgba(142,95,179,.3);
+  border-radius: var(--r-xs);
+  background: rgba(100,46,128,.18);
+}
+
+.hero-h1 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(3.8rem,7vw,6.4rem);
+  font-weight: 900;
+  line-height: .97;
+  letter-spacing: -.05em;
+  color: var(--cream);
+  margin-bottom: 26px;
+  animation: fadeUp .55s .16s both;
+}
+.hero-h1 .italic { font-family: 'Lora', serif; font-style: italic; font-weight: 600; color: var(--sage-light); }
+.hero-h1 .outline { color: transparent; -webkit-text-stroke: 1.5px rgba(250,248,244,.25); }
+
+.hero-sub { font-size: 1.02rem; color: rgba(250,248,244,.5); line-height: 1.75; max-width: 430px; margin-bottom: 36px; animation: fadeUp .55s .24s both; font-weight: 400; }
+
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; animation: fadeUp .55s .32s both; margin-bottom: 56px; }
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 0;
+  border-top: 1px solid rgba(250,248,244,.07);
+  padding-top: 32px;
+  animation: fadeUp .55s .4s both;
+}
+.hstat { padding-right: 28px; border-right: 1px solid rgba(250,248,244,.07); }
+.hstat:last-child { border-right: none; padding-right: 0; padding-left: 28px; }
+.hstat:nth-child(2) { padding-left: 28px; }
+.hstat-num { font-family: 'DM Sans', sans-serif; font-size: 2.6rem; color: var(--cream); font-weight: 900; letter-spacing: -.05em; display: block; line-height: 1; margin-bottom: 5px; }
+.hstat-label { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(250,248,244,.28); }
+
+.pg-hero {
+  position: relative;
+  padding-bottom: 60px;   /* small breathing room */
+  min-height: auto;       /* 🔥 remove full screen */
+}
+
+.hero-image-panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+}
+.hero-image-panel {
+  right: -40px;   /* 🔥 move right */
+}
+.hero-image-panel img {
+  transform: translateX(100px);
+  top: 100px; 
+  
+}
+
+.hero-image-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.hero-img-frame {
+  width: 380px;          /* or whatever your design uses */
+  height: 475px;
+  border-radius: 28px;
+  overflow: hidden;      /* 🔥 important */
+  position: relative;
+}
+
+.hero-img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* 🔥 THIS is the key fix */
+  display: block;
+}
+
+/* Decorative floating pills */
+.hero-pill {
+  position: absolute;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--r-full);
+  padding: 8px 16px;
+  font-size: .72rem;
+  font-weight: 700;
+  color: rgba(250,248,244,.75);
+  letter-spacing: .02em;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+.hero-pill-1 { top: 18px; left: -20px; animation: floatY 5s ease-in-out infinite; }
+.hero-pill-2 { bottom: 22px; right: -16px; animation: floatY 6s ease-in-out infinite 1.5s; }
+.hero-pill-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--sage-light); margin-right: 7px; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes floatY {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* TICKER */
+.ticker { background: var(--sage); padding: 12px 0; overflow: hidden; border-top: 1px solid rgba(255,255,255,.08); }
+.ticker-track { display: flex; white-space: nowrap; animation: tick 32s linear infinite; }
+.ticker-item { display: inline-flex; align-items: center; gap: 22px; padding: 0 22px; font-size: .7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+.ticker-item.hi { color: rgba(255,255,255,.88); }
+.ticker-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,.2); flex-shrink: 0; }
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* WHAT WE DO */
+.what-sec { background: var(--cream); }
+.what-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.what-cards { display: flex; flex-direction: column; gap: 0; margin: 28px 0; }
+.wcard { display: flex; align-items: flex-start; gap: 18px; padding: 20px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: all .18s; }
+.wcard:first-child { border-top: 1px solid var(--border); }
+.wcard:hover { padding-left: 8px; }
+.wcard:hover .wcard-arrow { transform: translateX(4px); color: var(--sage); }
+.wcard-icon { width: 44px; height: 44px; border-radius: var(--r-sm); background: var(--sage-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .18s; }
+.wcard-icon svg { width: 20px; height: 20px; stroke: var(--sage); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.wcard:hover .wcard-icon { background: var(--sage-soft); }
+.wcard-body { flex: 1; }
+.wcard-body h4 { font-size: .9rem; font-weight: 800; color: var(--ink); margin-bottom: 4px; letter-spacing: -.01em; }
+.wcard-body p { font-size: .81rem; color: var(--muted); line-height: 1.65; }
+.wcard-arrow { color: var(--muted-2); font-size: 1rem; margin-top: 2px; transition: all .18s; flex-shrink: 0; font-weight: 700; }
+.what-vis { position: sticky; top: 90px; }
+.stat-hero { background: var(--ink); border-radius: var(--r-xl); padding: 36px; margin-bottom: 12px; position: relative; overflow: hidden; }
+.stat-hero::before { content: ''; position: absolute; width: 280px; height: 280px; border-radius: 50%; background: rgba(100,46,128,.25); right: -80px; top: -80px; }
+.sh-label { font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(250,248,244,.3); margin-bottom: 10px; position: relative; }
+.sh-number { font-family: 'DM Sans', sans-serif; font-size: 5rem; color: var(--cream); font-weight: 900; letter-spacing: -.06em; line-height: 1; position: relative; }
+.sh-sub { font-size: .85rem; color: rgba(250,248,244,.4); margin-top: 10px; line-height: 1.6; position: relative; font-weight: 400; }
+.mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.mini-card { background: var(--cream-2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px; text-align: center; }
+.mini-num { font-family: 'DM Sans', sans-serif; font-size: 2.1rem; color: var(--sage); font-weight: 900; display: block; letter-spacing: -.04em; }
+.mini-lbl { font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted-2); margin-top: 4px; }
+
+/* FEATURES */
+.features-sec { background: var(--cream-2); padding: 100px 48px; }
+.features-head { max-width: 1120px; margin: 0 auto 52px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
+.feat-grid { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.feat-card { background: var(--cream); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 28px; cursor: pointer; transition: all .25s cubic-bezier(.16,1,.3,1); position: relative; overflow: hidden; }
+.feat-card:hover { border-color: var(--sage-soft); transform: translateY(-4px); box-shadow: var(--sh-lg); }
+.feat-card-icon { width: 48px; height: 48px; border-radius: var(--r-md); background: var(--sage-pale); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.feat-card-icon svg { width: 22px; height: 22px; stroke: var(--sage); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.fc-tag { display: inline-block; font-size: .62rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--sage); border: 1.5px solid var(--sage-soft); padding: 3px 9px; border-radius: var(--r-xs); margin-bottom: 12px; }
+.feat-card h3 { font-size: .9rem; font-weight: 800; color: var(--ink); margin-bottom: 8px; letter-spacing: -.01em; }
+.feat-card p { font-size: .8rem; color: var(--muted); line-height: 1.7; }
+.fc-arrow { display: inline-flex; align-items: center; margin-top: 16px; font-size: .77rem; font-weight: 800; color: var(--sage); opacity: 0; transform: translateX(-6px); transition: all .2s; letter-spacing: .01em; }
+.feat-card:hover .fc-arrow { opacity: 1; transform: translateX(0); }
+
+/* INITIATIVES */
+.init-sec { background: var(--ink); padding: 100px 48px; }
+.init-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 52px; }
+.init-card { background: rgba(250,248,244,.05); border: 1px solid rgba(250,248,244,.08); border-radius: var(--r-xl); overflow: hidden; transition: all .25s; }
+.init-card:hover { transform: translateY(-5px); border-color: rgba(142,95,179,.25); box-shadow: 0 24px 60px rgba(0,0,0,.3); }
+.init-thumb { height: 140px; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 900; letter-spacing: -.03em; color: rgba(250,248,244,.15); font-family: 'DM Sans', sans-serif; position: relative; }
+.it1 { background: linear-gradient(135deg, rgba(100,46,128,.5), rgba(100,46,128,.2)); }
+.it2 { background: linear-gradient(135deg, rgba(196,134,42,.4), rgba(196,134,42,.15)); }
+.it3 { background: linear-gradient(135deg, rgba(142,95,179,.4), rgba(142,95,179,.15)); }
+.init-body { padding: 24px; }
+.init-body h3 { font-size: .88rem; font-weight: 800; color: var(--cream); margin-bottom: 8px; line-height: 1.35; letter-spacing: -.01em; }
+.init-body p { font-size: .79rem; color: rgba(250,248,244,.42); line-height: 1.65; margin-bottom: 18px; font-weight: 400; }
+.prog-info { display: flex; justify-content: space-between; font-size: .69rem; font-weight: 700; color: rgba(250,248,244,.3); margin-bottom: 7px; letter-spacing: .02em; }
+.prog-info strong { color: var(--sage-light); }
+.prog-track { height: 3px; background: rgba(250,248,244,.07); border-radius: var(--r-full); overflow: hidden; margin-bottom: 18px; }
+.prog-fill { height: 100%; background: linear-gradient(90deg, var(--sage), var(--sage-light)); border-radius: var(--r-full); }
+
+/* CTA */
+.cta-sec { background: var(--sage-pale); padding: 100px 48px; border-top: 1px solid var(--sage-soft); }
+.cta-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+.cta-inner h2 { font-family: 'DM Sans', sans-serif; font-size: clamp(2.4rem,4vw,3.8rem); font-weight: 900; line-height: 1.0; letter-spacing: -.05em; color: var(--ink); margin-bottom: 16px; }
+.cta-inner h2 em { font-family: 'Lora', serif; font-style: italic; font-weight: 600; color: var(--sage); }
+.cta-inner p { font-size: 1rem; color: var(--muted); margin-bottom: 36px; line-height: 1.75; }
+.cta-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+/* PAGE HERO */
+.pg-hero { padding-top: var(--nav-h); background: var(--ink); position: relative; overflow: hidden; }
+.pg-hero::after { content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(100,46,128,.28) 0%, transparent 65%); right: -100px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.pg-inner { max-width: 1120px; margin: 0 auto; padding: 60px 48px 68px; position: relative; z-index: 1; }
+.pg-inner h1 { font-family: 'DM Sans', sans-serif; font-size: clamp(2.8rem,5.5vw,4.5rem); font-weight: 900; color: var(--cream); margin-bottom: 16px; line-height: 1.0; letter-spacing: -.05em; }
+.pg-inner h1 em { font-family: 'Lora', serif; font-style: italic; font-weight: 600; color: var(--sage-light); }
+.pg-inner p { font-size: .98rem; color: rgba(250,248,244,.48); max-width: 460px; line-height: 1.8; font-weight: 400; }
+
+/* ABOUT */
+.about-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.about-text p { font-size: .95rem; color: var(--muted); line-height: 1.85; margin-bottom: 14px; }
+.belief-list { list-style: none; border-top: 1px solid var(--border); margin-top: 24px; }
+.belief-list li { display: flex; align-items: flex-start; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--border); font-size: .87rem; color: var(--muted); line-height: 1.6; font-weight: 500; }
+.belief-arrow { color: var(--sage); font-size: .75rem; margin-top: 3px; flex-shrink: 0; font-weight: 900; }
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; margin-bottom: 28px; }
+.sr-item { background: var(--cream); padding: 24px; text-align: center; }
+.sr-num { font-family: 'DM Sans', sans-serif; font-size: 2.4rem; font-weight: 900; color: var(--sage); letter-spacing: -.05em; display: block; margin-bottom: 4px; }
+.sr-lbl { font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted-2); }
+.value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 28px; }
+.vcard { background: var(--cream); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 22px; transition: all .2s; }
+.vcard:hover { border-color: var(--sage-soft); background: var(--sage-pale); transform: translateY(-2px); }
+.vcard-icon { width: 38px; height: 38px; border-radius: var(--r-sm); background: var(--sage-pale); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.vcard-icon svg { width: 18px; height: 18px; stroke: var(--sage); fill: none; stroke-width: 2; stroke-linecap: round; }
+.vcard h4 { font-size: .88rem; font-weight: 800; color: var(--ink); margin-bottom: 6px; letter-spacing: -.01em; }
+.vcard p { font-size: .79rem; color: var(--muted); line-height: 1.65; }
+
+/* ═══════════════════════════════════════════
+   TEAM — with illustrated avatars
+═══════════════════════════════════════════ */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+  gap: 16px;
+  margin-top: 44px;
+}
+.tc {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  transition: all .25s;
+}
+.tc:hover { transform: translateY(-5px); box-shadow: var(--sh-lg); border-color: transparent; }
+
+.tc-avatar {
+  width: 100%;
+  display: block;
+  aspect-ratio: 1 / 1;
+}
+
+.tc-body { padding: 18px 20px 22px; }
+.tc-name { font-size: .95rem; font-weight: 800; color: var(--ink); margin-bottom: 3px; letter-spacing: -.01em; }
+.tc-role { font-size: .72rem; font-weight: 700; color: var(--sage); margin-bottom: 10px; letter-spacing: .01em; text-transform: uppercase; }
+.tc-bio { font-size: .79rem; color: var(--muted); line-height: 1.6; }
+
+.join-banner { margin-top: 52px; background: var(--ink); border-radius: var(--r-xl); padding: 44px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.join-banner h3 { font-family: 'DM Sans', sans-serif; font-size: 1.7rem; font-weight: 900; letter-spacing: -.04em; color: var(--cream); margin-bottom: 8px; }
+.join-banner p { color: rgba(250,248,244,.42); font-size: .87rem; max-width: 380px; line-height: 1.65; }
+
+/* EVENTS */
+.ev-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 16px; margin-top: 44px; }
+.evc { background: var(--cream); border: 1px solid var(--border); border-radius: var(--r-xl); overflow: hidden; transition: all .25s; }
+.evc:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); border-color: transparent; }
+.ev-banner { height: 110px; position: relative; display: flex; align-items: center; justify-content: flex-start; padding: 20px 22px; }
+.eb1{background:linear-gradient(135deg,#d4ebe0,#a8d4bd)}
+.eb2{background:linear-gradient(135deg,#f8f0dd,#e8d4a0)}
+.eb3{background:linear-gradient(135deg,#dce5f0,#b8cfe0)}
+.eb4{background:linear-gradient(135deg,#f4e0d6,#e4bfac)}
+.ev-banner-title { font-family: 'DM Sans', sans-serif; font-weight: 900; font-size: 1.4rem; letter-spacing: -.04em; color: rgba(26,24,20,.3); line-height: 1; }
+.ev-date-badge { position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,.88); border-radius: var(--r-sm); padding: 7px 12px; text-align: center; font-family: 'DM Mono', monospace; font-size: .72rem; font-weight: 500; color: var(--ink); line-height: 1.4; box-shadow: var(--sh-sm); }
+.ev-body { padding: 22px; }
+.ev-body h3 { font-size: .88rem; font-weight: 800; color: var(--ink); margin-bottom: 8px; line-height: 1.35; letter-spacing: -.01em; }
+.ev-body p { font-size: .79rem; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+.ev-chips { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 16px; }
+.ev-chip { font-size: .65rem; font-weight: 700; letter-spacing: .04em; color: var(--muted); background: var(--cream-2); border: 1px solid var(--border); padding: 3px 9px; border-radius: var(--r-xs); }
+
+.steps-sec { background: var(--cream-2); }
+.step-list { margin-top: 40px; }
+.step-item { display: flex; gap: 32px; padding: 28px 0; border-bottom: 1px solid var(--border); }
+.step-num { font-family: 'DM Mono', monospace; font-size: .9rem; color: var(--muted-2); line-height: 1; flex-shrink: 0; padding-top: 3px; font-weight: 500; }
+.step-content h4 { font-size: .92rem; font-weight: 800; color: var(--ink); margin-bottom: 6px; letter-spacing: -.01em; }
+.step-content p { font-size: .83rem; color: var(--muted); line-height: 1.7; }
+
+/* EDUCATION TABS */
+.tab-bar { display: flex; gap: 2px; flex-wrap: wrap; margin-bottom: 36px; border-bottom: 1px solid var(--border); padding-bottom: 0; }
+.tab-btn { font-size: .79rem; font-weight: 800; color: var(--muted); background: none; border: none; cursor: pointer; padding: 10px 16px; border-bottom: 2.5px solid transparent; margin-bottom: -1px; transition: all .16s; white-space: nowrap; letter-spacing: .01em; }
+.tab-btn:hover { color: var(--ink); }
+.tab-btn.active { color: var(--sage); border-bottom-color: var(--sage); }
+.tab-pane { display: none; animation: pgIn .3s ease both; }
+.tab-pane.active { display: block; }
+.edu-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+
+/* Quiz */
+.quiz-panel { background: var(--ink); border-radius: var(--r-xl); padding: 32px; }
+.quiz-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.quiz-hdr h3 { font-size: .95rem; font-weight: 800; color: var(--cream); letter-spacing: -.01em; }
+.qprog { font-family: 'DM Mono', monospace; font-size: .7rem; color: var(--sage-light); background: rgba(100,46,128,.2); padding: 4px 11px; border-radius: var(--r-full); }
+.qq { font-size: .92rem; color: rgba(250,248,244,.8); margin-bottom: 18px; line-height: 1.7; font-weight: 400; }
+.qopts { display: flex; flex-direction: column; gap: 7px; }
+.qo { background: rgba(250,248,244,.05); border: 1px solid rgba(250,248,244,.08); border-radius: var(--r-sm); padding: 12px 15px; cursor: pointer; font-size: .82rem; font-weight: 500; color: rgba(250,248,244,.62); text-align: left; transition: all .14s; font-family: 'DM Sans', sans-serif; }
+.qo:hover { border-color: rgba(142,95,179,.4); color: var(--cream); background: rgba(100,46,128,.18); }
+.qo.right { border-color: rgba(122,184,150,.6); background: rgba(61,107,82,.15); color: #9fd4b2; }
+.qo.wrong { border-color: rgba(196,90,58,.5); background: rgba(196,90,58,.08); color: #e0a08a; }
+.qfb { margin-top: 12px; padding: 12px 15px; border-radius: var(--r-sm); font-size: .79rem; line-height: 1.7; display: none; font-weight: 400; }
+.qfb.show { display: block; }
+.qfb.right { background: rgba(61,107,82,.12); color: #9fd4b2; border: 1px solid rgba(122,184,150,.18); }
+.qfb.wrong { background: rgba(196,90,58,.07); color: #e0a08a; border: 1px solid rgba(196,90,58,.14); }
+.qres { text-align: center; padding: 24px 0; display: none; }
+.qres-score { font-family: 'DM Sans', sans-serif; font-size: 1.7rem; font-weight: 900; color: var(--cream); letter-spacing: -.04em; }
+.qres-msg { color: rgba(250,248,244,.45); margin: 10px 0 24px; font-size: .85rem; line-height: 1.6; }
+
+.rights-info { background: var(--sage-pale); border: 1px solid var(--sage-soft); border-radius: var(--r-xl); padding: 24px; margin-top: 28px; }
+.rights-info h4 { font-size: .85rem; font-weight: 800; color: var(--ink); margin-bottom: 14px; letter-spacing: -.01em; }
+.rights-info ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.rights-info li { font-size: .81rem; color: var(--muted); display: flex; gap: 10px; align-items: flex-start; font-weight: 500; }
+
+/* Scenario */
+.sc-panel { background: var(--cream); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 32px; }
+.sc-panel h3 { font-size: .95rem; font-weight: 800; color: var(--ink); margin-bottom: 5px; letter-spacing: -.01em; }
+.sc-panel > p { font-size: .8rem; color: var(--muted); margin-bottom: 20px; }
+.sc-situation { background: var(--cream-2); border: 1px solid var(--border); border-radius: var(--r-md); padding: 18px; font-size: .87rem; color: var(--ink-soft); line-height: 1.75; margin-bottom: 14px; font-style: italic; font-family: 'Lora', serif; }
+.sc-choices { display: flex; flex-direction: column; gap: 7px; }
+.sc-ch { background: var(--cream-2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 15px; cursor: pointer; font-size: .81rem; font-weight: 500; color: var(--muted); text-align: left; transition: all .16s; display: flex; align-items: flex-start; gap: 10px; font-family: 'DM Sans', sans-serif; }
+.sc-ch::before { content: '›'; color: var(--sage); font-weight: 900; font-size: 1rem; flex-shrink: 0; line-height: 1.3; }
+.sc-ch:hover { border-color: var(--sage-soft); background: var(--sage-pale); color: var(--sage); }
+.sc-result { margin-top: 14px; padding: 15px; border-radius: var(--r-sm); background: var(--sage-pale); border: 1px solid var(--sage-soft); font-size: .82rem; color: var(--ink-soft); line-height: 1.75; display: none; }
+.sc-result.show { display: block; }
+
+/* Poll */
+.poll-panel { background: var(--ink); border-radius: var(--r-xl); padding: 32px; max-width: 560px; margin-bottom: 14px; }
+.poll-panel h3 { font-size: .95rem; font-weight: 800; color: var(--cream); margin-bottom: 10px; letter-spacing: -.01em; }
+.poll-q { font-size: .9rem; color: rgba(250,248,244,.7); margin-bottom: 18px; line-height: 1.65; font-weight: 400; }
+.poll-opts { display: flex; flex-direction: column; gap: 7px; }
+.poll-opt { display: flex; align-items: center; gap: 12px; padding: 12px 15px; border: 1px solid rgba(250,248,244,.09); border-radius: var(--r-sm); cursor: pointer; font-size: .83rem; font-weight: 500; color: rgba(250,248,244,.58); transition: all .16s; font-family: 'DM Sans', sans-serif; }
+.poll-opt:hover, .poll-opt.sel { border-color: rgba(142,95,179,.4); background: rgba(100,46,128,.15); color: var(--cream); }
+.poll-bars { margin-top: 18px; display: none; flex-direction: column; gap: 10px; }
+.poll-bars.show { display: flex; }
+.pb-label { display: flex; justify-content: space-between; font-size: .71rem; color: rgba(250,248,244,.4); font-weight: 700; margin-bottom: 5px; }
+.pb-track { height: 4px; background: rgba(250,248,244,.07); border-radius: var(--r-full); overflow: hidden; }
+.pb-fill { height: 100%; background: var(--sage-light); border-radius: var(--r-full); transition: width 1.2s cubic-bezier(.16,1,.3,1); }
+.poll-note { font-size: .67rem; color: rgba(250,248,244,.2); margin-top: 14px; }
+.poll-context { max-width: 560px; padding: 24px; background: var(--cream-2); border: 1px solid var(--border); border-radius: var(--r-md); }
+.poll-context h4 { font-size: .88rem; font-weight: 800; color: var(--ink); margin-bottom: 9px; letter-spacing: -.01em; }
+.poll-context p { font-size: .83rem; color: var(--muted); line-height: 1.8; }
+
+/* Voting */
+.vote-hero-card { background: var(--sage-pale); border: 1px solid var(--sage-soft); border-radius: var(--r-xl); padding: 36px; display: flex; gap: 28px; align-items: center; margin-bottom: 24px; }
+.vote-hero-card .vhc-icon { width: 64px; height: 64px; background: var(--sage); border-radius: var(--r-lg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.vote-hero-card .vhc-icon svg { width: 32px; height: 32px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; }
+.vote-hero-card h2 { font-family: 'DM Sans', sans-serif; font-size: 1.9rem; font-weight: 900; color: var(--ink); margin-bottom: 10px; letter-spacing: -.04em; line-height: 1.05; }
+.vote-hero-card p { color: var(--muted); font-size: .88rem; line-height: 1.7; margin-bottom: 18px; }
+.vote-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(235px,1fr)); gap: 10px; }
+.vg-card { background: var(--cream); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px; transition: all .2s; }
+.vg-card:hover { border-color: var(--sage-soft); transform: translateY(-2px); box-shadow: var(--sh-md); }
+.vg-icon { width: 36px; height: 36px; border-radius: var(--r-sm); background: var(--sage-pale); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.vg-icon svg { width: 17px; height: 17px; stroke: var(--sage); fill: none; stroke-width: 2; stroke-linecap: round; }
+.vg-card h4 { font-size: .86rem; font-weight: 800; color: var(--ink); margin-bottom: 5px; letter-spacing: -.01em; }
+.vg-card p { font-size: .78rem; color: var(--muted); line-height: 1.6; }
+
+/* Resources */
+.res-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 9px; margin-top: 28px; }
+.res-card { display: flex; align-items: center; gap: 14px; padding: 16px 18px; background: var(--cream); border: 1px solid var(--border); border-radius: var(--r-md); text-decoration: none; transition: all .18s; }
+.res-card:hover { border-color: var(--sage-soft); transform: translateX(3px); box-shadow: var(--sh-sm); }
+.res-icon { width: 38px; height: 38px; border-radius: var(--r-sm); background: var(--sage-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.res-icon svg { width: 18px; height: 18px; stroke: var(--sage); fill: none; stroke-width: 2; stroke-linecap: round; }
+.res-info h4 { font-size: .84rem; font-weight: 800; color: var(--ink); letter-spacing: -.01em; }
+.res-info p { font-size: .72rem; color: var(--muted); margin-top: 2px; }
+
+/* BTS / YOUTUBE */
+.yt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(275px,1fr)); gap: 16px; margin-top: 44px; }
+.yt-card { background: var(--cream); border: 1px solid var(--border); border-radius: var(--r-xl); overflow: hidden; cursor: pointer; transition: all .25s; }
+.yt-card:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); border-color: transparent; }
+.yt-thumb { height: 155px; display: flex; align-items: center; justify-content: center; position: relative; }
+.y1{background:linear-gradient(135deg,#d4ebe0,#a8d4bd)}
+.y2{background:linear-gradient(135deg,#f8f0dd,#e8d4a0)}
+.y3{background:linear-gradient(135deg,#dce5f0,#b8cfe0)}
+.y4{background:linear-gradient(135deg,#f4e0d6,#e4bfac)}
+.y5{background:linear-gradient(135deg,#e8ddf4,#c8b5e0)}
+.y6{background:linear-gradient(135deg,#d4ebe0,#c8e8d8)}
+.yt-play-btn { position: absolute; width: 50px; height: 50px; background: rgba(255,255,255,.92); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--sh-md); transition: all .2s; }
+.yt-play-btn svg { width: 20px; height: 20px; fill: var(--sage); margin-left: 2px; }
+.yt-card:hover .yt-play-btn { background: var(--sage); transform: scale(1.1); }
+.yt-card:hover .yt-play-btn svg { fill: #fff; }
+.yt-thumb-label { position: absolute; bottom: 14px; left: 14px; font-family: 'DM Sans', sans-serif; font-weight: 900; font-size: 1.6rem; letter-spacing: -.04em; color: rgba(26,24,20,.2); line-height: 1; }
+.yt-info { padding: 18px 20px; }
+.yt-info h4 { font-size: .87rem; font-weight: 800; color: var(--ink); margin-bottom: 6px; line-height: 1.4; letter-spacing: -.01em; }
+.yt-info p { font-size: .77rem; color: var(--muted); line-height: 1.6; }
+.yt-chips { display: flex; gap: 5px; margin-top: 10px; flex-wrap: wrap; }
+.yt-chip { font-size: .64rem; font-weight: 700; color: var(--muted-2); background: var(--cream-2); border: 1px solid var(--border); padding: 2px 8px; border-radius: var(--r-xs); letter-spacing: .03em; }
+
+/* FOOTER */
+footer { background: var(--ink); }
+.footer-inner { max-width: 1120px; margin: 0 auto; padding: 64px 48px 28px; }
+.footer-top { display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr; gap: 52px; padding-bottom: 48px; border-bottom: 1px solid rgba(250,248,244,.07); }
+.f-logo { font-family: 'DM Sans', sans-serif; font-size: 1.6rem; font-weight: 900; letter-spacing: -.04em; color: var(--cream); cursor: pointer; display: block; margin-bottom: 14px; }
+.f-logo span { color: var(--sage-light); }
+.f-brand p { font-size: .81rem; color: rgba(250,248,244,.32); line-height: 1.8; max-width: 240px; font-weight: 400; }
+.f-email { color: var(--sage-light); font-size: .8rem; font-weight: 700; margin-top: 14px; display: block; text-decoration: none; transition: color .16s; }
+.f-email:hover { color: var(--cream); }
+.f-socials { display: flex; gap: 7px; margin-top: 18px; }
+.f-soc-btn { width: 35px; height: 35px; border-radius: var(--r-sm); background: rgba(250,248,244,.05); border: 1px solid rgba(250,248,244,.07); display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; transition: all .16s; }
+.f-soc-btn:hover { background: var(--sage); border-color: transparent; transform: translateY(-2px); }
+.f-soc-btn svg { width: 16px; height: 16px; stroke: rgba(250,248,244,.5); fill: none; stroke-width: 2; stroke-linecap: round; }
+.f-soc-btn:hover svg { stroke: #fff; }
+.f-col h5 { font-size: .67rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: rgba(250,248,244,.22); margin-bottom: 16px; }
+.f-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.f-links a { font-size: .81rem; font-weight: 500; color: rgba(250,248,244,.38); text-decoration: none; cursor: pointer; transition: color .14s; }
+.f-links a:hover { color: rgba(250,248,244,.78); }
+.footer-bottom { padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: .73rem; color: rgba(250,248,244,.2); font-weight: 500; }
+.footer-bottom a { color: var(--sage-light); text-decoration: none; }
+.footer-bottom a:hover { color: var(--cream); }
+
+/* MODAL */
+.overlay { display: none; position: fixed; inset: 0; background: rgba(26,24,20,.55); backdrop-filter: blur(10px); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.overlay.open { display: flex; }
+.modal { background: var(--cream); border-radius: var(--r-xl); padding: 36px; max-width: 420px; width: 100%; box-shadow: var(--sh-xl); animation: modalIn .3s cubic-bezier(.16,1,.3,1) both; position: relative; border: 1px solid var(--border); }
+@keyframes modalIn { from { opacity: 0; transform: scale(.93) translateY(16px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+.modal-close { position: absolute; top: 16px; right: 16px; width: 30px; height: 30px; border-radius: 50%; background: var(--cream-2); border: none; cursor: pointer; font-size: .85rem; font-weight: 700; color: var(--muted); display: flex; align-items: center; justify-content: center; transition: all .14s; }
+.modal-close:hover { background: var(--cream-3); color: var(--ink); }
+.modal h3 { font-family: 'DM Sans', sans-serif; font-size: 1.65rem; font-weight: 900; color: var(--ink); margin-bottom: 6px; letter-spacing: -.04em; }
+.modal p { color: var(--muted); font-size: .83rem; margin-bottom: 24px; line-height: 1.65; font-weight: 400; }
+.mfg { margin-bottom: 14px; }
+.mfg label { display: block; font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
+.mfg input, .mfg select { width: 100%; padding: 11px 14px; border: 2px solid var(--border-mid); border-radius: var(--r-sm); font-family: 'DM Sans', sans-serif; font-size: .87rem; font-weight: 500; color: var(--ink); background: var(--cream); outline: none; transition: border-color .16s, box-shadow .16s; -webkit-appearance: none; }
+.mfg input:focus, .mfg select:focus { border-color: var(--sage); box-shadow: 0 0 0 3px rgba(100,46,128,.1); }
+.msuc { display: none; text-align: center; padding: 16px 0; }
+.msuc-em { font-family: 'DM Sans', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--sage); display: block; margin-bottom: 14px; letter-spacing: -.04em; }
+.msuc h3 { color: var(--ink); margin-bottom: 8px; }
+.msuc p { color: var(--muted); font-size: .86rem; }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  nav { padding: 0 22px; }
+  .nav-links { display: none; }
+  .ham { display: flex; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 48px 22px; }
+  .hero-image-panel { max-width: 320px; margin: 0 auto; }
+  .what-layout { grid-template-columns: 1fr; gap: 40px; }
+  .about-split { grid-template-columns: 1fr; gap: 40px; }
+  .feat-grid { grid-template-columns: 1fr 1fr; }
+  .init-grid { grid-template-columns: 1fr; }
+  .edu-cols { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .sec, .features-sec, .cta-sec, .init-sec, .steps-sec { padding: 64px 22px; }
+  .pg-inner { padding: 44px 22px 52px; }
+  .join-banner { flex-direction: column; text-align: center; }
+  .vote-hero-card { flex-direction: column; text-align: center; }
+}
+@media (max-width: 600px) {
+  .feat-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr; gap: 20px; }
+  .hstat { border-right: none; padding: 0; border-bottom: 1px solid rgba(250,248,244,.07); padding-bottom: 16px; }
+  .hstat:last-child { border-bottom: none; padding-bottom: 0; }
+  .footer-top { grid-template-columns: 1fr; }
+  .stat-row { grid-template-columns: 1fr; }
+  .value-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); }
+}
+.tc-avatar {
+  width: 100%;
+  height: 320px;      /* fixed height */
+  object-fit: cover;  /* ✅ crops nicely instead of squishing */
+  display: block;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ─────────────────────────────── -->
+<nav id="mainNav">
+  <div class="logo" onclick="showPage('home')">PK<span class="logo-accent">YR</span></div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a onclick="showPage('team')" id="nav-team">Team</a></li>
+    <li><a onclick="showPage('events')" id="nav-events">Events</a></li>
+    <li><a onclick="showPage('education')" id="nav-education">Education</a></li>
+    <li><a onclick="showPage('bts')" id="nav-bts">Behind the Scenes</a></li>
+  </ul>
+  <button class="nav-cta" onclick="openModal('volunteer')">Get Involved</button>
+  <button class="ham" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     HOME
+══════════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-texture"></div>
+    <div class="hero-stripe"></div>
+
+    <div class="hero-inner">
+      <!-- LEFT -->
+      <div class="hero-copy">
+        <div class="hero-eyeline">
+          <span class="hero-chip">Civic Education for Young People</span>
+        </div>
+        <h1 class="hero-h1">
+          Close<br>the Gap.<br>
+          <span class="italic">Elevate</span><br>
+          the <span class="outline">Future.</span>
+        </h1>
+        <p class="hero-sub">
+          project know ur rights is a youth-led initiative dedicated to empowering young people with the civic knowledge and tools they need to create change in their communities and beyond.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-sage btn-lg" onclick="showPage('education')">Learn Your Rights</button>
+          <button class="btn btn-outline-light btn-lg" onclick="showPage('events')">Get Involved</button>
+        </div>
+
+      </div>
+
+      <!-- RIGHT — image with fallback illustration -->
+      <div class="hero-image-panel">
+        <div style="position:relative;width:100%">
+
+
+          
+            <!-- Try to load actual image; if it 404s the SVG placeholder shows -->
+            <img src="NEF_9341.JPG" alt="Young people engaged in civic education"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <!-- SVG placeholder shown if image missing -->
+            <svg style="display:none;width:100%;height:100%;position:absolute;inset:0" viewBox="0 0 380 475" xmlns="http://www.w3.org/2000/svg">
+              <rect width="380" height="475" fill="#2a1540"/>
+              <!-- Background glow -->
+              <circle cx="280" cy="80" r="150" fill="rgba(100,46,128,0.3)"/>
+              <circle cx="80" cy="380" r="100" fill="rgba(142,95,179,0.15)"/>
+              <!-- Three illustrated figures -->
+              <!-- Figure 1 (left) -->
+              <g transform="translate(55,130)">
+                <circle cx="35" cy="0" r="28" fill="#7B3FA0"/>
+                <path d="M7 55 Q35 40 63 55 L70 140 Q35 155 0 140 Z" fill="#572E80"/>
+                <circle cx="35" cy="0" r="13" fill="#e8c5f7"/>
+                <ellipse cx="30" cy="-3" rx="4" ry="5" fill="#3d1a5c"/>
+                <ellipse cx="40" cy="-3" rx="4" ry="5" fill="#3d1a5c"/>
+                <path d="M28 8 Q35 14 42 8" stroke="#3d1a5c" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <path d="M0 140 L-8 210" stroke="#572E80" stroke-width="10" stroke-linecap="round"/>
+                <path d="M70 140 L78 210" stroke="#572E80" stroke-width="10" stroke-linecap="round"/>
+                <path d="M7 80 L-20 110" stroke="#7B3FA0" stroke-width="8" stroke-linecap="round"/>
+                <path d="M63 80 L90 105" stroke="#7B3FA0" stroke-width="8" stroke-linecap="round"/>
+              </g>
+              <!-- Figure 2 (center, taller) -->
+              <g transform="translate(155,90)">
+                <circle cx="35" cy="0" r="30" fill="#642E80"/>
+                <path d="M5 58 Q35 42 65 58 L72 155 Q35 170 -2 155 Z" fill="#4a1f6e"/>
+                <circle cx="35" cy="0" r="14" fill="#f5deff"/>
+                <ellipse cx="29" cy="-3" rx="4.5" ry="5" fill="#2a0a42"/>
+                <ellipse cx="41" cy="-3" rx="4.5" ry="5" fill="#2a0a42"/>
+                <path d="M27 9 Q35 16 43 9" stroke="#2a0a42" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <!-- hair -->
+                <path d="M21-14 Q35-22 49-14 Q52-5 49 2 Q35-8 21 2 Q18-5 21-14Z" fill="#1a0a2e"/>
+                <path d="M-2 155 L-10 230" stroke="#4a1f6e" stroke-width="11" stroke-linecap="round"/>
+                <path d="M72 155 L80 230" stroke="#4a1f6e" stroke-width="11" stroke-linecap="round"/>
+                <path d="M5 95 L-22 120" stroke="#642E80" stroke-width="9" stroke-linecap="round"/>
+                <path d="M65 95 L92 115" stroke="#642E80" stroke-width="9" stroke-linecap="round"/>
+              </g>
+              <!-- Figure 3 (right) -->
+              <g transform="translate(255,145)">
+                <circle cx="35" cy="0" r="26" fill="#8E5FB3"/>
+                <path d="M9 52 Q35 38 61 52 L67 132 Q35 147 3 132 Z" fill="#6b3f9a"/>
+                <circle cx="35" cy="0" r="12" fill="#fce8ff"/>
+                <ellipse cx="30" cy="-2" rx="3.5" ry="4.5" fill="#3a1562"/>
+                <ellipse cx="40" cy="-2" rx="3.5" ry="4.5" fill="#3a1562"/>
+                <path d="M28 7 Q35 13 42 7" stroke="#3a1562" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <path d="M3 132 L-4 200" stroke="#6b3f9a" stroke-width="9" stroke-linecap="round"/>
+                <path d="M67 132 L74 200" stroke="#6b3f9a" stroke-width="9" stroke-linecap="round"/>
+                <path d="M9 75 L-14 100" stroke="#8E5FB3" stroke-width="7" stroke-linecap="round"/>
+                <path d="M61 75 L84 98" stroke="#8E5FB3" stroke-width="7" stroke-linecap="round"/>
+              </g>
+              <!-- Stars/confetti -->
+              <circle cx="50" cy="60" r="3" fill="rgba(255,255,255,0.3)"/>
+              <circle cx="320" cy="40" r="4" fill="rgba(255,255,255,0.2)"/>
+              <circle cx="340" cy="200" r="2.5" fill="rgba(255,255,255,0.25)"/>
+              <circle cx="30" cy="310" r="3" fill="rgba(255,255,255,0.2)"/>
+              <!-- Label tag at bottom -->
+              <rect x="70" y="400" width="240" height="48" rx="12" fill="rgba(100,46,128,0.5)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <text x="190" y="420" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="700" fill="rgba(255,255,255,0.5)" letter-spacing="3">YOUTH · RIGHTS · POWER</text>
+              <text x="190" y="440" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" font-weight="900" fill="rgba(255,255,255,0.85)" letter-spacing="0.5">PKYR Community</text>
+            </svg>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE DO -->
+  <section class="sec what-sec">
+    <div class="inn what-layout">
+      <div>
+        <div class="label">What We Do</div>
+        <h2 class="sec-title">Civic power starts<br>with <em>knowing.</em></h2>
+        <p class="sec-body" style="margin-bottom:28px">project know ur rights does _______, _______, ________.</p>
+        <div class="what-cards">
+          <div class="wcard" onclick="showPage('education')">
+            <div class="wcard-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+            <div class="wcard-body"><h4>Education</h4><p>interactive quizzes scenarios .....</p></div>
+            <span class="wcard-arrow">→</span>
+          </div>
+          <div class="wcard" onclick="showPage('events')">
+            <div class="wcard-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+            <div class="wcard-body"><h4>Civic Empowerment</h4><p>workshops ......</p></div>
+            <span class="wcard-arrow">→</span>
+          </div>
+          <div class="wcard" onclick="openModal('blog')">
+            <div class="wcard-icon"><svg viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></div>
+            <div class="wcard-body"><h4>Civic Advocacy</h4><p>advocacy efforts ......</p></div>
+            <span class="wcard-arrow">→</span>
+          </div>
+        </div>
+        <div style="margin-top:28px">
+          <button class="btn btn-outline" onclick="showPage('about')">Our Full Story</button>
+        </div>
+      </div>
+      <div class="what-vis"></div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-sec">
+    <div class="features-head">
+      <div>
+        <div class="label">Learn by Doing</div>
+        <h2 class="sec-title">Civic education<br>that <em>sticks.</em></h2>
+      </div>
+      <button class="btn btn-outline" onclick="showPage('education')">Explore All</button>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card" onclick="showPage('education')">
+        <div class="feat-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span class="fc-tag">Quiz</span>
+        <h3>Do You Know Your Rights?</h3>
+        <p>caption</p>
+        <span class="fc-arrow">Take the Quiz</span>
+      </div>
+      <div class="feat-card" onclick="showPage('education')">
+        <div class="feat-card-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <span class="fc-tag">Scenario</span>
+        <h3>Choose Your Scenario</h3>
+        <p>caption</p>
+        <span class="fc-arrow">Try a Scenario</span>
+      </div>
+      <div class="feat-card" onclick="showPage('education')">
+        <div class="feat-card-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <span class="fc-tag">Poll</span>
+        <h3>Community Poll</h3>
+        <p>caption</p>
+        <span class="fc-arrow">Vote Now</span>
+      </div>
+      <div class="feat-card" onclick="eduTab('voting')">
+        <div class="feat-card-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <span class="fc-tag">Action</span>
+        <h3>Register to Vote</h3>
+        <p>caption</p>
+        <span class="fc-arrow">Get Registered</span>
+      </div>
+      <div class="feat-card" onclick="eduTab('resources')">
+        <div class="feat-card-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></div>
+        <span class="fc-tag">Resources</span>
+        <h3>Resource Library</h3>
+        <p>caption.</p>
+        <span class="fc-arrow">Browse Resources</span>
+      </div>
+      <div class="feat-card" onclick="openModal('blog')">
+        <div class="feat-card-icon"><svg viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></div>
+        <span class="fc-tag">Blog</span>
+        <h3>Write for PKYR</h3>
+        <p>caption</p>
+        <span class="fc-arrow">Submit a Pitch</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INITIATIVES -->
+  <section class="init-sec">
+    <div class="inn">
+      <div class="label light">Active Programs</div>
+      <h2 class="sec-title light">Our current<br><em>initiatives.</em></h2>
+      <p class="sec-body" style="color:rgba(250,248,244,.42)">Campaigns running right now — join in.</p>
+      <div class="init-grid">
+        <div class="init-card">
+          <div class="init-thumb it1"><span style="position:absolute;bottom:14px;left:18px;font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,244,.35)">Rights Workshop</span></div>
+          <div class="init-body">
+            <h3>Civic education workshop</h3>
+            <p>caption.</p>
+            <div class="prog-info"><span>Students Enrolled</span><strong>200 / 200</strong></div>
+            <div class="prog-track"><div class="prog-fill" style="width:62%"></div></div>
+            <button class="btn btn-sage btn-sm" onclick="openModal('event')">Join Now</button>
+          </div>
+        </div>
+        <div class="init-card">
+          <div class="init-thumb it2"><span style="position:absolute;bottom:14px;left:18px;font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,244,.35)">Voter Drive</span></div>
+          <div class="init-body">
+            <h3>Initative 2</h3>
+            <p>caption</p>
+            <div class="prog-info"><span>Registered So Far</span><strong>1,840 / 3,000</strong></div>
+            <div class="prog-track"><div class="prog-fill" style="width:61%"></div></div>
+            <button class="btn btn-outline-light btn-sm" onclick="eduTab('voting')">Get Registered</button>
+          </div>
+        </div>
+        <div class="init-card">
+          <div class="init-thumb it3"><span style="position:absolute;bottom:14px;left:18px;font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,244,.35)">Youth Writing</span></div>
+          <div class="init-body">
+            <h3>Initiative 3</h3>
+            <p>caption</p>
+            <div class="prog-info"><span>Pieces Published</span><strong>78 / 150</strong></div>
+            <div class="prog-track"><div class="prog-fill" style="width:52%"></div></div>
+            <button class="btn btn-outline-light btn-sm" onclick="openModal('blog')">Write for Us</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-sec">
+    <div class="cta-inner">
+      <div class="label clay" style="justify-content:center">Join the Movement</div>
+      <h2>Your Voice Is a<br><em>Civic Superpower.</em></h2>
+      <p>caption</p>
+      <div class="cta-btns">
+        <button class="btn btn-primary btn-lg" onclick="openModal('signup')">Join Our Community</button>
+        <button class="btn btn-outline btn-lg" onclick="showPage('events')">See Upcoming Events</button>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /home -->
+
+<!-- ══════════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════════ -->
+<div class="page" id="page-about">
+  <div class="pg-hero">
+    <div class="pg-inner">
+      <div class="label light">Our Organization</div>
+      <h1>Who We Are &amp;<br>Why We <em>Exist.</em></h1>
+      <p>project know ur righst is a nonprofit organization dedicated to closing the gap between what young people know about their rights and what they need to know.</p>
+    </div>
+  </div>
+  <section class="sec" style="background:var(--cream)">
+    <div class="inn about-split">
+      <div class="about-text">
+        <div class="label">Our Vision</div>
+        <h2 class="sec-title">A generation that<br>knows its <em>power.</em></h2>
+        <p>text </p>
+        <p>more text</p>
+        <ul class="belief-list">
+          <li><span class="belief-arrow">→</span>belief 1</li>
+          <li><span class="belief-arrow">→</span>belief 2/li>
+          <li><span class="belief-arrow">→</span>belief 3</li>
+          <li><span class="belief-arrow">→</span>belief 4</li>
+          <li><span class="belief-arrow">→</span>belief 5</li>
+        </ul>
+      </div>
+      <div>
+        <div class="label">Our Mission</div>
+        <h2 class="sec-title">How we <em>show up.</em></h2>
+        <p style="color:var(--muted);line-height:1.8;font-size:.95rem;margin-bottom:24px">what you guys do and like how </p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-primary btn-sm" onclick="showPage('team')">Meet Our Team</button>
+          <button class="btn btn-outline btn-sm" onclick="openModal('volunteer')">Volunteer</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="sec" style="background:var(--cream-2);padding-top:0">
+    <div class="inn">
+      <div class="label">Our Values</div>
+      <h2 class="sec-title">What We <em>Stand For.</em></h2>
+      <div class="value-grid">
+        <div class="vcard"><div class="vcard-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h4>value1</h4><p>somethings about that value</p></div>
+        <div class="vcard"><div class="vcard-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>value 2</h4><p>somethings about that value</p></div>
+        <div class="vcard"><div class="vcard-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><h4>value 3</h4><p>somethings about that value</p></div>
+        <div class="vcard"><div class="vcard-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h4>value 4</h4><p>somethings about that value</p></div>
+      </div>
+    </div>
+  </section>
+</div
+
+<!-- ══════════════════════════════════════════════
+     TEAM — with illustrated SVG avatars
+══════════════════════════════════════════════ -->
+<div class="page" id="page-team">
+  <div class="pg-hero">
+    <div class="pg-inner">
+      <div class="label light">Our People</div>
+      <h1>Built by Young People,<br>for Young <em>People.</em></h1>
+      <p>every person at project know your rights is young or something about why that is important.</p>
+    </div>
+  </div>
+  <section class="sec" style="background:var(--cream)">
+    <div class="inn">
+      <div class="label">Leadership</div>
+      <h2 class="sec-title">Meet the <em>Team.</em></h2>
+      <div class="team-grid">
+
+        <!-- Srija -->
+        <div class="tc">
+       <img class="tc-avatar" src="srija.jpg" alt="Srija">
+          <div class="tc-body">
+            <div class="tc-name">Srija</div>
+            <div class="tc-role">Role</div>
+            <div class="tc-bio">about urself and like what you do</div>
+          </div>
+        </div>
+
+        <!-- Nikash -->
+        <div class="tc">
+          <img class="tc-avatar" src="nikash.jpeg" alt="Nikash">
+          <div class="tc-body">
+            <div class="tc-name">Nikash</div>
+            <div class="tc-role">Role</div>
+            <div class="tc-bio">about urself and like what you do </div>
+          </div>
+        </div>
+
+        <!-- Radhika -->
+        <div class="tc">
+          <img class="tc-avatar" src="radhika.jpeg" alt="Radhika">
+          <div class="tc-body">
+            <div class="tc-name">Radhika</div>
+            <div class="tc-role">Role</div>
+            <div class="tc-bio">about urself and like what you do</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="join-banner">
+        <div>
+          <h3>Want to get involved</h3>
+          <p>caption</p>
+        </div>
+        <button class="btn btn-sage" onclick="openModal('volunteer')">Apply to Volunteer</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     EVENTS
+══════════════════════════════════════════════ -->
+<div class="page" id="page-events">
+  <div class="pg-hero">
+    <div class="pg-inner">
+      <div class="label light">Get Involved</div>
+      <h1>Workshops, Events &amp;<br><em>Opportunities.</em></h1>
+      <p>caption</p>
+    </div>
+  </div>
+  <section class="sec" style="background:var(--cream)">
+    <div class="inn">
+      <div class="label">Upcoming</div>
+      <h2 class="sec-title">Our Latest <em>Events.</em></h2>
+      <div class="ev-grid">
+        <div class="evc">
+          <div class="ev-banner eb1"><span class="ev-banner-title">Rights</span><div class="ev-date-badge">APR<br>12</div></div>
+          <div class="ev-body">
+            <h3>Event 1/h3>
+            <p>caption</p>
+            <div class="ev-chips"><span class="ev-chip">2 hrs</span><span class="ev-chip">Virtual</span><span class="ev-chip">Free</span></div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('event')">Sign Up</button>
+          </div>
+        </div>
+        <div class="evc">
+          <div class="ev-banner eb2"><span class="ev-banner-title">Voter Drive</span><div class="ev-date-badge">APR<br>19</div></div>
+          <div class="ev-body">
+            <h3>Event 2</h3>
+            <p>caption</p>
+            <div class="ev-chips"><span class="ev-chip">90 min</span><span class="ev-chip">Hybrid</span><span class="ev-chip">Free</span></div>
+            <button class="btn btn-outline btn-sm" onclick="openModal('event')">Sign Up</button>
+          </div>
+        </div>
+        <div class="evc">
+          <div class="ev-banner eb3"><span class="ev-banner-title">Forum</span><div class="ev-date-badge">MAY<br>3</div></div>
+          <div class="ev-body">
+            <h3>Event 3</h3>
+            <p>caption</p>
+            <div class="ev-chips"><span class="ev-chip">3 hrs</span><span class="ev-chip">In-Person</span><span class="ev-chip">Free</span></div>
+            <button class="btn btn-outline btn-sm" onclick="openModal('event')">Sign Up</button>
+          </div>
+        </div>
+        <div class="evc">
+          <div class="ev-banner eb4"><span class="ev-banner-title">Writing</span><div class="ev-date-badge">MAY<br>10</div></div>
+          <div class="ev-body">
+            <h3>Event 4</h3>
+            <p>caption</p>
+            <div class="ev-chips"><span class="ev-chip">1 hr</span><span class="ev-chip">Virtual</span><span class="ev-chip">Open</span></div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('event')">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="sec steps-sec">
+    <div class="inn">
+      <div class="label">Getting Involved</div>
+      <h2 class="sec-title">How to <em>join PKYR.</em></h2>
+      <div class="step-list">
+        <div class="step-item"><div class="step-num">01</div><div class="step-content"><h4>Step 1</h4><p>caption</p></div></div>
+        <div class="step-item"><div class="step-num">02</div><div class="step-content"><h4>Step 2</h4><p>caption</p></div></div>
+        <div class="step-item"><div class="step-num">03</div><div class="step-content"><h4>Step 3</h4><p>caption</p></div></div>
+        <div class="step-item"><div class="step-num">04</div><div class="step-content"><h4>Step 4</h4><p>caption</p></div></div>
+      </div>
+      <div style="margin-top:36px;display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="openModal('volunteer')">Apply to Volunteer</button>
+        <button class="btn btn-outline" onclick="openModal('interview')">Request an Interview</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     EDUCATION
+══════════════════════════════════════════════ -->
+<div class="page" id="page-education">
+  <div class="pg-hero">
+    <div class="pg-inner">
+      <div class="label light">Civic Education</div>
+      <h1>Knowledge Is<br>Your First <em>Right.</em></h1>
+      <p>Caption</p>
+    </div>
+  </div>
+  <section class="sec" style="background:var(--cream)">
+    <div class="inn">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('quiz')">Rights Quiz</button>
+        <button class="tab-btn" onclick="switchTab('scenario')">Scenarios</button>
+        <button class="tab-btn" onclick="switchTab('poll')">Poll</button>
+        <button class="tab-btn" onclick="switchTab('voting')">Register to Vote</button>
+        <button class="tab-btn" onclick="switchTab('resources')">Resources</button>
+      </div>
+
+      <div class="tab-pane active" id="tab-quiz">
+        <div class="edu-cols">
+          <div class="quiz-panel">
+            <div class="quiz-hdr"><h3>Do You Know Your Rights?</h3><span class="qprog" id="qprog">1 / 5</span></div>
+            <p class="qq" id="qq"></p>
+            <div class="qopts" id="qopts"></div>
+            <div class="qfb" id="qfb"></div>
+            <div style="margin-top:14px"><button class="btn btn-outline-light btn-sm" id="qnext" onclick="nextQ()" style="display:none">Next Question</button></div>
+            <div class="qres" id="qres">
+              <div class="qres-score" id="qscore"></div>
+              <p class="qres-msg" id="qmsg"></p>
+              <button class="btn btn-outline-light btn-sm" onclick="initQ()">Try Again</button>
+            </div>
+          </div>
+          <div>
+            <div class="label">Why This Matters</div>
+            <h3 style="font-family:'DM Sans',sans-serif;font-size:1.55rem;font-weight:900;color:var(--ink);margin-bottom:14px;letter-spacing:-.04em;line-height:1.05">Your Rights Under<br>the Constitution</h3>
+            <p style="color:var(--muted);line-height:1.85;font-size:.9rem;margin-bottom:14px">The Bill of Rights protects your fundamental freedoms from government overreach — but knowing about them and knowing how they work in practice are very different things.</p>
+            <p style="color:var(--muted);line-height:1.85;font-size:.9rem;margin-bottom:24px">Less than 40% of Americans can name all five First Amendment freedoms. PKYR is changing that.</p>
+            <div class="rights-info">
+              <h4>Key Rights to Know</h4>
+              <ul>
+                <li><span style="color:var(--sage);font-weight:900">1st</span><span>Speech, press, religion, assembly, petition</span></li>
+                <li><span style="color:var(--sage);font-weight:900">4th</span><span>Protection from unreasonable searches</span></li>
+                <li><span style="color:var(--sage);font-weight:900">5th</span><span>Right to remain silent</span></li>
+                <li><span style="color:var(--sage);font-weight:900">6th</span><span>Right to a fair trial</span></li>
+                <li><span style="color:var(--sage);font-weight:900">26th</span><span>Voting rights at 18</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="tab-scenario">
+        <div class="edu-cols">
+          <div class="sc-panel">
+            <h3>Choose Your Scenario</h3>
+            <p>Real situations. Real rights. What would you do?</p>
+            <div class="sc-situation" id="sc-txt"></div>
+            <div class="sc-choices" id="sc-choices"></div>
+            <div class="sc-result" id="sc-res"></div>
+            <div style="margin-top:18px;display:flex;gap:9px;flex-wrap:wrap">
+              <button class="btn btn-primary btn-sm" onclick="nextSc()">Next Scenario</button>
+              <button class="btn btn-outline btn-sm" onclick="resetSc()">Reset</button>
+            </div>
+          </div>
+          <div>
+            <div class="label">Why Scenarios?</div>
+            <h3 style="font-family:'DM Sans',sans-serif;font-size:1.55rem;font-weight:900;color:var(--ink);margin-bottom:14px;letter-spacing:-.04em;line-height:1.05">Knowledge only sticks<br>when it's <em style="font-family:'Lora',serif;font-style:italic;font-weight:600;color:var(--sage)">real</em></h3>
+            <p style="color:var(--muted);line-height:1.85;font-size:.9rem;margin-bottom:24px">You can memorize the Bill of Rights — but when a police officer approaches you, what do you actually do? Our scenarios close the gap between knowing and acting.</p>
+            <div style="display:flex;flex-direction:column;gap:8px" id="sc-sel"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="tab-poll">
+        <div class="poll-panel">
+          <h3>Community Poll</h3>
+          <p class="poll-q">Do you feel civic education is taught well in your school or community?</p>
+          <div class="poll-opts" id="poll-opts">
+            <div class="poll-opt" onclick="castVote(0)">Yes, I feel well-prepared</div>
+            <div class="poll-opt" onclick="castVote(1)">Somewhat, but there are gaps</div>
+            <div class="poll-opt" onclick="castVote(2)">No, barely taught anything</div>
+            <div class="poll-opt" onclick="castVote(3)">I had to learn on my own</div>
+          </div>
+          <div class="poll-bars" id="poll-bars"></div>
+          <p class="poll-note">Anonymous. Results are illustrative.</p>
+        </div>
+        <div class="poll-context">
+          <h4>Why are we asking?</h4>
+          <p>Research consistently shows civic education is unequally distributed — students in lower-income communities receive far less instruction. Your response helps PKYR advocate for better policy.</p>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="tab-voting">
+        <div class="vote-hero-card">
+          <div class="vhc-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+          <div>
+            <h2>Your Vote Is Your Voice. Use It.</h2>
+            <p>Voting is the most direct way to influence your government. Here's everything you need before Election Day.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <a href="https://vote.gov" target="_blank" class="btn btn-sage btn-sm">Register at vote.gov</a>
+              <a href="https://www.usa.gov/absentee-voting" target="_blank" class="btn btn-outline btn-sm">Absentee Voting</a>
+            </div>
+          </div>
+        </div>
+        <div class="vote-grid">
+          <div class="vg-card"><div class="vg-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><h4>Am I Eligible?</h4><p>U.S. citizens 18+ on Election Day. Many states allow pre-registration at 16–17.</p></div>
+          <div class="vg-card"><div class="vg-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div><h4>How to Register</h4><p>Online, by mail, or in person. Most states have deadlines 15–30 days out.</p></div>
+          <div class="vg-card"><div class="vg-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><h4>Voting as a Student</h4><p>Register at your school or home address. Absentee voting lets you vote in your home district while away.</p></div>
+          <div class="vg-card"><div class="vg-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><h4>Election Day</h4><p>Bring ID if required. If you're in line when polls close, stay — you have the right to vote.</p></div>
+          <div class="vg-card"><div class="vg-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h4>Local Elections Matter Most</h4><p>School board, city council, judges — these races happen every year and affect daily life most.</p></div>
+          <div class="vg-card"><div class="vg-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><h4>Help Others Vote</h4><p>Once registered, help friends register too. Volunteer as a poll worker — you can get paid!</p></div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="tab-resources">
+        <div class="label">Link Library</div>
+        <h3 style="font-family:'DM Sans',sans-serif;font-size:2.1rem;font-weight:900;color:var(--ink);margin-bottom:6px;letter-spacing:-.05em">Essential <em style="font-family:'Lora',serif;font-style:italic;font-weight:600;color:var(--sage)">Resources.</em></h3>
+        <p style="color:var(--muted);margin-bottom:0;font-size:.87rem">Curated links to help you know, act, and advocate.</p>
+        <div class="res-grid">
+          <a href="https://www.aclu.org" target="_blank" class="res-card"><div class="res-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="res-info"><h4>ACLU — Know Your Rights</h4><p>Guides to your rights in everyday situations</p></div></a>
+          <a href="https://vote.gov" target="_blank" class="res-card"><div class="res-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><div class="res-info"><h4>vote.gov</h4><p>Official U.S. voter registration portal</p></div></a>
+          <a href="https://www.naacp.org" target="_blank" class="res-card"><div class="res-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="res-info"><h4>NAACP</h4><p>Civil rights resources and advocacy tools</p></div></a>
+          <a href="https://www.usa.gov/voting-laws" target="_blank" class="res-card"><div class="res-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="res-info"><h4>USA.gov — Voting Laws</h4><p>State-by-state voting laws explained</p></div></a>
+          <a href="https://www.rockthevote.org" target="_blank" class="res-card"><div class="res-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="res-info"><h4>Rock the Vote</h4><p>Youth voter registration resources</p></div></a>
+          <a href="https://generationcitizen.org" target="_blank" class="res-card"><div class="res-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div><div class="res-info"><h4>Generation Citizen</h4><p>Action civics programs for young people</p></div></a>
+          <a href="https://www.congress.gov" target="_blank" class="res-card"><div class="res-icon"><svg viewBox="0 0 24 24"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg></div><div class="res-info"><h4>Congress.gov</h4><p>Find your reps and track legislation</p></div></a>
+          <a href="https://iknowmyrights.org" target="_blank" class="res-card"><div class="res-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="res-info"><h4>I Know My Rights</h4><p>Youth-focused rights education and legal aid</p></div></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     BTS
+══════════════════════════════════════════════ -->
+<div class="page" id="page-bts">
+  <div class="pg-hero">
+    <div class="pg-inner">
+      <div class="label light">Behind the Scenes</div>
+      <h1>Header <br>header header header  <em> header</em></h1>
+      <p>caption</p>
+    </div>
+  </div>
+  <section class="sec" style="background:var(--cream)">
+    <div class="inn">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:8px">
+        <div>
+          <div class="label">Our YouTube</div>
+          <h2 class="sec-title">Latest <em>Videos.</em></h2>
+        </div>
+        <a href="https://youtube.com" target="_blank" class="btn btn-primary">Subscribe</a>
+      </div>
+      <div class="yt-grid">
+        <div class="yt-card" onclick="window.open('https://youtube.com','_blank')"><div class="yt-thumb y1"><div class="yt-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><div class="yt-thumb-label">Word/Picture</div></div><div class="yt-info"><h4>Title</h4><p>caption</p><div class="yt-chips"><span class="yt-chip">Workshop</span><span class="yt-chip">23 min</span></div></div></div>
+        <div class="yt-card" onclick="window.open('https://youtube.com','_blank')"><div class="yt-thumb y2"><div class="yt-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><div class="yt-thumb-label">Word/Picture</div></div><div class="yt-info"><h4>Title</h4><p>caption</p><div class="yt-chips"><span class="yt-chip">Voter Drive</span><span class="yt-chip">15 min</span></div></div></div>
+        <div class="yt-card" onclick="window.open('https://youtube.com','_blank')"><div class="yt-thumb y3"><div class="yt-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><div class="yt-thumb-label">Word/Picture</div></div><div class="yt-info"><h4>Title</h4><p>caption</p><div class="yt-chips"><span class="yt-chip">Org Life</span><span class="yt-chip">10 min</span></div></div></div>
+        <div class="yt-card" onclick="window.open('https://youtube.com','_blank')"><div class="yt-thumb y4"><div class="yt-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><div class="yt-thumb-label">Word/Picture</div></div><div class="yt-info"><h4>Title</h4><p>caption</p><div class="yt-chips"><span class="yt-chip">Know Your Rights</span><span class="yt-chip">18 min</span></div></div></div>
+        <div class="yt-card" onclick="window.open('https://youtube.com','_blank')"><div class="yt-thumb y5"><div class="yt-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><div class="yt-thumb-label">Word/Picture</div></div><div class="yt-info"><h4>Title</h4><p>caption</p><div class="yt-chips"><span class="yt-chip">Founder</span><span class="yt-chip">8 min</span></div></div></div>
+        <div class="yt-card" onclick="window.open('https://youtube.com','_blank')"><div class="yt-thumb y6"><div class="yt-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><div class="yt-thumb-label">Word/Picture</div></div><div class="yt-info"><h4>Title</h4><p>caption</p><div class="yt-chips"><span class="yt-chip">Stories</span><span class="yt-chip">12 min</span></div></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ── FOOTER ─────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="f-brand">
+        <span class="f-logo" onclick="showPage('home')">Project<span> Know Your Rights</span></span>
+        <p>a youth led initative nonrprofi</p>
+        <a href="mailto:project.knowyourrights0@gmail.com" class="f-email">project.knowyourrights0@gmail.com</a>
+<div class="f-socials">
+  
+  <!-- Instagram -->
+  <a href="https://instagram.com/project.know.your.rights" target="_blank" class="f-soc-btn">
+    <svg viewBox="0 0 24 24">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+      <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+    </svg>
+  </a>
+
+  <!-- TikTok -->
+  <a href="https://www.tiktok.com/@projectknowyourrights" target="_blank" class="f-soc-btn">
+    <svg viewBox="0 0 24 24">
+    <path d="M12 2h3a5 5 0 005 5v3a8 8 0 01-5-1.7v7.2a5.5 5.5 0 11-5.5-5.5c.3 0 .6 0 .9.1v3a2.5 2.5 0 102.6 2.5V2z"/>
+  </svg>
+  
+  </a>
+
+  <!-- YouTube -->
+  <a href="https://youtube.com" target="_blank" class="f-soc-btn">
+    <svg viewBox="0 0 24 24">
+      <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/>
+      <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+    </svg>
+  </a>
+
+  <!-- Spotify -->
+  <a href="#" target="_blank" class="f-soc-btn">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M7 10c3-1 7-.8 10 .5"/>
+      <path d="M7.5 13c2.5-.8 5.5-.6 8 .4"/>
+      <path d="M8 16c2-.5 4-.3 6 .3"/>
+    </svg>
+  </a>
+
+</div>
+      </div>
+      <div class="f-col">
+        <h5>Navigate</h5>
+        <ul class="f-links">
+          <li><a onclick="showPage('home')">Home</a></li>
+          <li><a onclick="showPage('about')">About Us</a></li>
+          <li><a onclick="showPage('team')">Our Team</a></li>
+          <li><a onclick="showPage('events')">Events</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h5>Learn</h5>
+        <ul class="f-links">
+          <li><a onclick="eduTab('quiz')">Know Your Rights</a></li>
+          <li><a onclick="eduTab('scenario')">Scenarios</a></li>
+          <li><a onclick="eduTab('voting')">Register to Vote</a></li>
+          <li><a onclick="eduTab('resources')">Resources</a></li>
+          <li><a onclick="showPage('bts')">Behind the Scenes</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h5>Get Involved</h5>
+        <ul class="f-links">
+          <li><a onclick="openModal('volunteer')">Volunteer</a></li>
+          <li><a onclick="showPage('events')">Workshops</a></li>
+          <li><a onclick="openModal('event')">Sign Up for Events</a></li>
+          <li><a onclick="openModal('blog')">Write for Us</a></li>
+          <li><a href="mailto:project.knowyourrights0@gmail.com">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 PKYR. All rights reserved./span>
+      <span>Contact: <a href="mailto:project.knowyourrights0@gmail.com">project.knowyourrights0@gmail.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ── MODAL ──────────────────────────────────── -->
+<div class="overlay" id="overlay" onclick="closeOverlay(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeAll()">✕</button>
+    <h3 id="m-title">Sign Up</h3>
+    <p id="m-sub">Fill in your details below.</p>
+    <div id="m-form">
+      <div class="mfg"><label>Full Name</label><input type="text" placeholder="Your name"></div>
+      <div class="mfg"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+      <div class="mfg" id="m-extra"></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:4px" onclick="submitForm()">Submit</button>
+    </div>
+    <div class="msuc" id="m-suc">
+      <span class="msuc-em">You're in!</span>
+      <h3>Welcome to project know your rights.</h3>
+      <p>we will be in touch with the email you provide.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+const PAGES = ['home','about','team','events','education','bts'];
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + id);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (id === 'education') { initQ(); initSc(); }
+  document.querySelector('.nav-links').style.display = '';
+}
+
+function toggleMobile() {
+  const nl = document.querySelector('.nav-links');
+  const open = nl.style.display === 'flex';
+  if (open) {
+    nl.style.display = '';
+  } else {
+    Object.assign(nl.style, {
+      display: 'flex', flexDirection: 'column',
+      position: 'fixed', top: '70px', left: 0, right: 0,
+      background: 'rgba(250,248,244,.97)',
+      padding: '16px 24px',
+      borderBottom: '1px solid rgba(26,24,20,.08)',
+      boxShadow: '0 12px 40px rgba(26,24,20,.1)',
+      zIndex: 999,
+      gap: '2px',
+      backdropFilter: 'blur(20px)'
+    });
+  }
+}
+
+const TABS = ['quiz','scenario','poll','voting','resources'];
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', TABS[i] === id));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (id === 'quiz') initQ();
+  if (id === 'scenario') initSc();
+}
+function eduTab(id) { showPage('education'); setTimeout(() => switchTab(id), 90); }
+
+const QS = [
+  { q:"Which Amendment protects freedom of speech, religion, and the press?", o:["2nd Amendment","3rd Amendment","1st Amendment","7th Amendment"], a:2, e:"The First Amendment protects speech, religion, press, assembly, and petition." },
+  { q:"Which Amendment protects you from unreasonable searches and seizures?", o:["2nd Amendment","4th Amendment","6th Amendment","8th Amendment"], a:1, e:"The Fourth Amendment requires police to have a warrant or probable cause before searching you." },
+  { q:"If arrested, which Amendment gives you the right to remain silent?", o:["1st Amendment","3rd Amendment","5th Amendment","9th Amendment"], a:2, e:"The Fifth Amendment protects against self-incrimination." },
+  { q:"At what age can U.S. citizens vote in federal elections?", o:["16","17","18","21"], a:2, e:"The 26th Amendment (1971) lowered the voting age to 18." },
+  { q:"Which Amendment abolished slavery in the United States?", o:["10th","12th","13th","15th"], a:2, e:"The 13th Amendment (1865) abolished slavery and involuntary servitude." }
+];
+let qi=0, qs=0, qd=false;
+
+function initQ() {
+  qi=0; qs=0; qd=false;
+  document.getElementById('qres').style.display='none';
+  document.getElementById('qq').style.display='';
+  document.getElementById('qopts').style.display='';
+  document.getElementById('qfb').className='qfb';
+  document.getElementById('qnext').style.display='none';
+  renderQ();
+}
+function renderQ() {
+  if (qi >= QS.length) { showQR(); return; }
+  const d = QS[qi];
+  document.getElementById('qprog').textContent = (qi+1)+' / '+QS.length;
+  document.getElementById('qq').textContent = d.q;
+  const el = document.getElementById('qopts'); el.innerHTML='';
+  d.o.forEach((o,i)=>{
+    const b = document.createElement('button');
+    b.className='qo'; b.textContent=o;
+    b.onclick=()=>ansQ(i,b); el.appendChild(b);
+  });
+  document.getElementById('qfb').className='qfb';
+  document.getElementById('qnext').style.display='none';
+  qd=false;
+}
+function ansQ(i,btn) {
+  if(qd) return; qd=true;
+  const d=QS[qi];
+  document.querySelectorAll('.qo').forEach(b=>b.style.cursor='default');
+  const fb=document.getElementById('qfb');
+  if(i===d.a){ qs++; btn.classList.add('right'); fb.className='qfb right show'; fb.textContent='Correct. '+d.e; }
+  else { btn.classList.add('wrong'); document.querySelectorAll('.qo')[d.a].classList.add('right'); fb.className='qfb wrong show'; fb.textContent='Not quite. '+d.e; }
+  document.getElementById('qnext').style.display='inline-flex';
+}
+function nextQ(){ qi++; renderQ(); }
+function showQR(){
+  document.getElementById('qq').style.display='none';
+  document.getElementById('qopts').style.display='none';
+  document.getElementById('qfb').style.display='none';
+  document.getElementById('qnext').style.display='none';
+  document.getElementById('qres').style.display='block';
+  const p=qs/QS.length;
+  document.getElementById('qscore').textContent=qs+' / '+QS.length+' Correct';
+  const m=p===1?'Perfect score! You really know your rights.':p>=.8?'Great job! Strong civic knowledge.':p>=.6?'Good start — explore our resources to keep learning.':'Keep going — this knowledge matters.';
+  document.getElementById('qmsg').textContent=m;
+}
+
+const SC=[
+  { t:"You're peacefully protesting outside city hall. Police tell you to leave, calling your gathering 'disruptive.' You have a valid permit. What do you do?", c:[
+    {l:"Leave immediately to avoid trouble",ok:false,e:"You don't have to leave with a valid permit. Calmly show it instead."},
+    {l:"Calmly show your permit and state your legal right to be there",ok:true,e:"Correct. With a valid permit, you're exercising your First Amendment right to assemble."},
+    {l:"Argue loudly and accuse officers of violating your rights",ok:false,e:"You may be right, but confrontational behavior can escalate. Stay firm but calm."},
+    {l:"Record the officers without saying anything",ok:false,e:"Recording is legal in public, but showing your permit is the most direct first response."}
+  ]},
+  { t:"A police officer stops you on the street and asks you to empty your pockets. You haven't done anything wrong. What's your best response?", c:[
+    {l:"Empty your pockets — you have nothing to hide",ok:false,e:"Complying voluntarily waives your 4th Amendment rights."},
+    {l:"Ask: 'Am I being detained or am I free to go?'",ok:true,e:"The key question. This clarifies your legal status without escalating the situation."},
+    {l:"Run away immediately",ok:false,e:"Running can be interpreted as suspicious and carries legal risk."},
+    {l:"Shout that the officer has no right to stop you",ok:false,e:"You may be right, but this escalates the situation. Stay calm and ask the right questions."}
+  ]},
+  { t:"Your school wants to search your locker and your phone. What should you know about your rights?", c:[
+    {l:"Schools can search anything — you're a minor",ok:false,e:"The 4th Amendment still applies in schools, but with 'reasonable suspicion' rather than a warrant."},
+    {l:"You can refuse all searches entirely",ok:false,e:"Lockers often have broader search policies. Phones require stronger justification."},
+    {l:"Schools need reasonable suspicion for lockers; phones have stronger protections",ok:true,e:"Correct. Courts give schools more latitude for locker searches, but phones retain stronger privacy protections."},
+    {l:"Stay silent and immediately call a lawyer",ok:false,e:"Calling a parent is wise. Understanding the situation first helps you make better decisions."}
+  ]}
+];
+let si=0, sd=false;
+
+function initSc(){ si=0; renderSc(); buildScSel(); }
+function renderSc(){
+  const s=SC[si];
+  document.getElementById('sc-txt').textContent=s.t;
+  const el=document.getElementById('sc-choices'); el.innerHTML='';
+  s.c.forEach(c=>{
+    const b=document.createElement('button');
+    b.className='sc-ch'; b.textContent=c.l;
+    b.onclick=()=>ansSc(c,b); el.appendChild(b);
+  });
+  const r=document.getElementById('sc-res');
+  r.style.display='none'; r.className='sc-result';
+  sd=false;
+}
+function ansSc(c,btn){
+  if(sd) return; sd=true;
+  const r=document.getElementById('sc-res');
+  r.style.display='block'; r.classList.add('show');
+  r.innerHTML=(c.ok?'<strong>Strong choice.</strong> ':'<strong>Consider this:</strong> ')+c.e;
+  btn.style.borderColor=c.ok?'rgba(100,46,128,.5)':'rgba(196,90,58,.4)';
+  btn.style.background=c.ok?'rgba(100,46,128,.06)':'rgba(196,90,58,.04)';
+  btn.style.color=c.ok?'var(--sage)':'var(--clay)';
+  document.querySelectorAll('.sc-ch').forEach(b=>b.style.cursor='default');
+}
+function nextSc(){ si=(si+1)%SC.length; renderSc(); buildScSel(); }
+function resetSc(){ renderSc(); }
+function buildScSel(){
+  const el=document.getElementById('sc-sel'); if(!el) return;
+  el.innerHTML='<p style="font-size:.68rem;font-weight:800;color:var(--muted-2);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px">Pick a scenario:</p>';
+  ['Protest Rights','Police Stop','School Search'].forEach((lbl,i)=>{
+    const b=document.createElement('button');
+    b.className='btn btn-outline btn-sm';
+    b.style.textAlign='left'; b.style.justifyContent='flex-start'; b.style.fontSize='.79rem';
+    if(i===si){ b.style.borderColor='var(--sage)'; b.style.color='var(--sage)'; b.style.background='var(--sage-pale)'; }
+    b.textContent=lbl;
+    b.onclick=()=>{ si=i; renderSc(); buildScSel(); };
+    el.appendChild(b);
+  });
+}
+
+const PD=[{l:"Yes, well-prepared",p:8},{l:"Somewhat, gaps",p:31},{l:"No, barely taught",p:42},{l:"Learned on my own",p:19}];
+function castVote(i){
+  document.querySelectorAll('.poll-opt').forEach((o,j)=>o.classList.toggle('sel',j===i));
+  const el=document.getElementById('poll-bars');
+  el.innerHTML='<p style="font-size:.68rem;font-weight:800;color:rgba(250,248,244,.28);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px">Community results (simulated)</p>';
+  PD.forEach(d=>el.innerHTML+=`<div><div class="pb-label"><span>${d.l}</span><span>${d.p}%</span></div><div class="pb-track"><div class="pb-fill" style="width:${d.p}%"></div></div></div>`);
+  el.classList.add('show');
+  document.querySelectorAll('.poll-opt').forEach(o=>o.style.cursor='default');
+}
+
+const MC = {
+  event: {
+    t: 'Sign Up for This Event',
+    s: "We'll send confirmation and details to your email.",
+    x: `<label>Which event?</label>
+        <select>
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+          <option>Option 4</option>
+          <option>Option 5</option>
+        </select>`
+  },
+
+  volunteer: {
+    t: 'Apply to Volunteer',
+    s: "We'll match you based on your skills and availability.",
+    x: `<label>Area of Interest</label>
+        <select>
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+          <option>Option 4</option>
+          <option>Option 5</option>
+        </select>`
+  },
+
+  interview: {
+    t: 'Request a Team Interview',
+    s: "For leadership roles — 20-minute video call.",
+    x: `<label>Role Type</label>
+        <select>
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+          <option>Option 4</option>
+          <option>Option 5</option>
+        </select>`
+  },
+
+  blog: {
+    t: 'Write for PKYR',
+    s: "Share your perspective with our community.",
+    x: `<label>Your pitch</label>
+        <input type="text" placeholder="Option 1">`
+  },
+
+  signup: {
+    t: 'Join Our Community',
+    s: "Free updates, workshops, and civic resources.",
+    x: ''
+  }
+};
+function openModal(type){
+  const c=MC[type]||MC.signup;
+  document.getElementById('m-title').textContent=c.t;
+  document.getElementById('m-sub').textContent=c.s;
+  document.getElementById('m-extra').innerHTML=c.x;
+  document.getElementById('m-form').style.display='';
+  document.getElementById('m-suc').style.display='none';
+  document.getElementById('overlay').classList.add('open');
+}
+function closeOverlay(e){ if(e.target===document.getElementById('overlay')) closeAll(); }
+function closeAll(){ document.getElementById('overlay').classList.remove('open'); }
+function submitForm(){
+  document.getElementById('m-form').style.display='none';
+  document.getElementById('m-suc').style.display='block';
+  setTimeout(closeAll,2400);
+}
+
+initQ(); initSc();
+</script>
+</body>
+</html>
